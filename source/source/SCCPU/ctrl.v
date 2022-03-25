@@ -14,7 +14,7 @@ module ctrl(Op, Funct, Zero,
    output       RegWrite; // control signal for register write
    output       MemWrite; // control signal for memory write
    output       EXTOp;    // control signal to signed extension
-   output [2:0] ALUOp;    // ALU opertion
+   output [3:0] ALUOp;    // ALU opertion
    output [1:0] NPCOp;    // next pc operation
    output       ALUSrc;   // ALU source for A
 
@@ -64,15 +64,16 @@ module ctrl(Op, Funct, Zero,
   assign NPCOp[0] = i_beq & Zero;
   assign NPCOp[1] = i_j;
   
-  // ALU_NOP   3'b000
-  // ALU_ADD   3'b001
-  // ALU_SUB   3'b010
-  // ALU_AND   3'b011
-  // ALU_OR    3'b100
-  // ALU_SLT   3'b101
-  // ALU_SLTU  3'b110
+  // ALU_NOP   4'b0000
+  // ALU_ADD   4'b0001
+  // ALU_SUB   4'b0010
+  // ALU_AND   4'b0011
+  // ALU_OR    4'b0100
+  // ALU_SLT   4'b0101
+  // ALU_SLTU  4'b0110
   assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu;
   assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu;
   assign ALUOp[2] = i_or | i_ori | i_slt | i_sltu;
+  assign ALUOp[3] = 
 
 endmodule

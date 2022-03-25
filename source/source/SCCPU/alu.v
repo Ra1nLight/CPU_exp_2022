@@ -3,7 +3,7 @@
 module alu(A, B, ALUOp, C, Zero);
            
    input  signed [31:0] A, B;
-   input         [2:0]  ALUOp;
+   input         [3:0]  ALUOp;
    output signed [31:0] C;
    output Zero;
    
