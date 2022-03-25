@@ -38,20 +38,21 @@ module ctrl(Op, Funct, Zero,
    wire i_lw   =  Op[5]&~Op[4]&~Op[3]&~Op[2]& Op[1]& Op[0]; // lw
    wire i_sw   =  Op[5]&~Op[4]& Op[3]&~Op[2]& Op[1]& Op[0]; // sw
    wire i_beq  = ~Op[5]&~Op[4]&~Op[3]& Op[2]&~Op[1]&~Op[0]; // beq
+   wire i_andi = ~Op[5]&~Op[4]& Op[3]& Op[2]&~Op[1]&~Op[0]; // andi
 
   // j format
    wire i_j    = ~Op[5]&~Op[4]&~Op[3]&~Op[2]& Op[1]&~Op[0];  // j
 
   // generate control signals
-  assign RegWrite   = rtype | i_lw | i_addi | i_ori; // register write  
+  assign RegWrite   = rtype | i_lw | i_addi | i_ori | i_andi; // register write  
   
   assign MemWrite   = i_sw;                           // memory write
-  assign ALUSrc     = i_lw | i_sw | i_addi | i_ori;   // ALU B is from instruction immediate
+  assign ALUSrc     = i_lw | i_sw | i_addi | i_ori | i_andi;   // ALU B is from instruction immediate
   assign EXTOp      = i_addi | i_lw | i_sw;           // signed extension
 
   // GPRSel_RD   1'b0
   // GPRSel_RT   1'b1
-  assign GPRSel = i_lw | i_addi | i_ori;
+  assign GPRSel = i_lw | i_addi | i_ori | i_andi;
   
   // WDSel_FromALU 2'b00
   // WDSel_FromMEM 2'b01
@@ -71,8 +72,8 @@ module ctrl(Op, Funct, Zero,
   // ALU_OR    4'b0100
   // ALU_SLT   4'b0101
   // ALU_SLTU  4'b0110
-  assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu;
-  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu;
+  assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu | i_andi;
+  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi;
   assign ALUOp[2] = i_or | i_ori | i_slt | i_sltu;
   assign ALUOp[3] = 
 
