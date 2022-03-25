@@ -27,10 +27,11 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
 
    wire [31:0] NPC;         // next PC
 
+   wire [5:0]  Op;          // opcode
    wire [4:0]  rs;          // rs
    wire [4:0]  rt;          // rt
    wire [4:0]  rd;          // rd
-   wire [5:0]  Op;          // opcode
+   wire [4:0]  Shamt;       // shamt
    wire [5:0]  Funct;       // funct
    wire [15:0] Imm16;       // 16-bit immediate
    wire [31:0] Imm32;       // 32-bit immediate
@@ -41,10 +42,11 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
    wire [31:0] B;           // operator for ALU B
    
    assign Op = instr[31:26];  // instruction
-   assign Funct = instr[5:0]; // funct
    assign rs = instr[25:21];  // rs
    assign rt = instr[20:16];  // rt
    assign rd = instr[15:11];  // rd
+   assign Shamt = instr[10:6];// shamt
+   assign Funct = instr[5:0]; // funct
    assign Imm16 = instr[15:0];// 16-bit immediate
    assign IMM = instr[25:0];  // 26-bit immediate
    
