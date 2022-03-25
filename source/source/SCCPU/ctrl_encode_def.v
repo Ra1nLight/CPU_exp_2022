@@ -12,4 +12,6 @@
 `define ALU_OR    4'b0100
 `define ALU_SLT   4'b0101
 `define ALU_SLTU  4'b0110
+`define ALU_NOR   4'b0111
+`define ALU_SLL   4'b1000
 

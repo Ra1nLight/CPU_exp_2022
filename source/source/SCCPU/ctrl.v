@@ -42,28 +42,32 @@ module ctrl(Op, Funct, Zero,
 
   // j format
    wire i_j    = ~Op[5]&~Op[4]&~Op[3]&~Op[2]& Op[1]&~Op[0];  // j
+   wire i_jal  = ~Op[5]&~Op[4]&~Op[3]&~Op[2]& Op[1]& Op[0];  // jal
 
   // generate control signals
-  assign RegWrite   = rtype | i_lw | i_addi | i_ori | i_andi; // register write  
+  assign RegWrite   = rtype | i_lw | i_addi | i_ori | i_andi | i_jal; // register write  
   
   assign MemWrite   = i_sw;                           // memory write
   assign ALUSrc     = i_lw | i_sw | i_addi | i_ori | i_andi;   // ALU B is from instruction immediate
   assign EXTOp      = i_addi | i_lw | i_sw;           // signed extension
 
-  // GPRSel_RD   1'b0
-  // GPRSel_RT   1'b1
-  assign GPRSel = i_lw | i_addi | i_ori | i_andi;
+  // GPRSel_RD   2'b00
+  // GPRSel_RT   2'b01
+  // GPRSel_31   2'b10
+  assign GPRSel[0] = i_lw | i_addi | i_ori | i_andi;
+  assign GPRSel[1] = i_jal;
   
   // WDSel_FromALU 2'b00
   // WDSel_FromMEM 2'b01
   // WDSel_FromPC  2'b10 
-  assign WDSel = i_lw;  
+  assign WDSel[0] = i_lw;  
+  assign WDSel[1] = i_jal;
 
   // NPC_PLUS4   2'b00
   // NPC_BRANCH  2'b01
   // NPC_JUMP    2'b10
   assign NPCOp[0] = i_beq & Zero;
-  assign NPCOp[1] = i_j;
+  assign NPCOp[1] = i_j | i_jal;
   
   // ALU_NOP   4'b0000
   // ALU_ADD   4'b0001
@@ -72,9 +76,11 @@ module ctrl(Op, Funct, Zero,
   // ALU_OR    4'b0100
   // ALU_SLT   4'b0101
   // ALU_SLTU  4'b0110
+  // ALU_NOR   4'b0111
+  // ALU_SLL   4'b1000
   assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu | i_andi;
   assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi;
   assign ALUOp[2] = i_or | i_ori | i_slt | i_sltu;
-  assign ALUOp[3] = 
+  assign ALUOp[3] = i_sll;
 
 endmodule
