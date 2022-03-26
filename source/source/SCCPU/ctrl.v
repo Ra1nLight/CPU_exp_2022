@@ -31,6 +31,7 @@ module ctrl(Op, Funct, Zero,
    wire i_sltu = rtype& Funct[5]&~Funct[4]& Funct[3]&~Funct[2]& Funct[1]& Funct[0]; // sltu
    wire i_addu = rtype& Funct[5]&~Funct[4]&~Funct[3]&~Funct[2]&~Funct[1]& Funct[0]; // addu
    wire i_subu = rtype& Funct[5]&~Funct[4]&~Funct[3]&~Funct[2]& Funct[1]& Funct[0]; // subu
+   wire i_nor  = rtype& Funct[5]&~Funct[4]&~Funct[3]& Funct[2]& Funct[1]& Funct[0]; // nor
 
   // i format
    wire i_addi = ~Op[5]&~Op[4]& Op[3]&~Op[2]&~Op[1]&~Op[0]; // addi
@@ -45,7 +46,7 @@ module ctrl(Op, Funct, Zero,
    wire i_jal  = ~Op[5]&~Op[4]&~Op[3]&~Op[2]& Op[1]& Op[0];  // jal
 
   // generate control signals
-  assign RegWrite   = rtype | i_lw | i_addi | i_ori | i_andi | i_jal; // register write  
+  assign RegWrite   = rtype | i_lw | i_addi | i_ori | i_andi | i_jal | i_nor; // register write  
   
   assign MemWrite   = i_sw;                           // memory write
   assign ALUSrc     = i_lw | i_sw | i_addi | i_ori | i_andi;   // ALU B is from instruction immediate
@@ -78,9 +79,9 @@ module ctrl(Op, Funct, Zero,
   // ALU_SLTU  4'b0110
   // ALU_NOR   4'b0111
   // ALU_SLL   4'b1000
-  assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu | i_andi;
-  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi;
-  assign ALUOp[2] = i_or | i_ori | i_slt | i_sltu;
+  assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu | i_andi | i_nor;
+  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi | i_nor;
+  assign ALUOp[2] = i_or | i_ori | i_slt | i_sltu | i_nor;
   assign ALUOp[3] = i_sll;
 
 endmodule
