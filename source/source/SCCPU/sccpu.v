@@ -19,8 +19,8 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
    wire [3:0]  ALUOp;       // ALU opertion
    wire [1:0]  NPCOp;       // next PC operation
 
-   wire  WDSel;             // (register) write data selection
-   wire  GPRSel;            // general purpose register selection
+   wire [1:0]  WDSel;       // (register) write data selection
+   wire [1:0]  GPRSel;      // general purpose register selection
    
    wire        ALUSrc;      // ALU source for A
    wire        Zero;        // ALU ouput zero
@@ -79,13 +79,13 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
    );
    
    // mux for register data to write
-   mux2 #(5) U_MUX2_GPR_A3 (
-      .d0(rd), .d1(rt), .s(GPRSel), .y(A3)
+   mux4 #(5) U_MUX4_GPR_A3 (
+      .d0(rd), .d1(rt), .d2(5'b11111), .d3(5'b0), .s(GPRSel), .y(A3)
    );
    
    // mux for register address to write
-   mux2 #(32) U_MUX2_GPR_WD (
-      .d0(aluout), .d1(readdata), .s(WDSel), .y(WD)
+   mux4 #(32) U_MUX4_GPR_WD (
+      .d0(aluout), .d1(readdata), .d2(PC + 4), .d3(32'b0), .s(WDSel), .y(WD)
    );
 
    // mux for signed extension or zero extension

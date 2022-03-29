@@ -18,8 +18,8 @@ module ctrl(Op, Funct, Zero,
    output [1:0] NPCOp;    // next pc operation
    output       ALUSrc;   // ALU source for A
 
-  output GPRSel;   // general purpose register selection
-  output WDSel;    // (register) write data selection
+   output [1:0] GPRSel;   // general purpose register selection
+   output [1:0] WDSel;    // (register) write data selection
    
   // r format
    wire rtype  = ~|Op;
