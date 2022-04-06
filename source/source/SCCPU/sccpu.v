@@ -22,7 +22,8 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
    wire [1:0]  WDSel;       // (register) write data selection
    wire [1:0]  GPRSel;      // general purpose register selection
    
-   wire        ALUSrc;      // ALU source for A
+   wire [1:0]  ALUSrc;      // ALU source for A
+   wire        SASrc;       // ALU source for Shamt
    wire        Zero;        // ALU ouput zero
 
    wire [31:0] NPC;         // next PC
@@ -39,7 +40,10 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
    wire [4:0]  A3;          // register address for write
    wire [31:0] WD;          // register write data
    wire [31:0] RD1;         // register data specified by rs
+   wire [31:0] RD2;         // register data specified by rt
+   wire [31:0] A;           // operator for ALU A
    wire [31:0] B;           // operator for ALU B
+   wire [4:0]  sa;          // operator for ALU Shamt
    
    assign Op = instr[31:26];  // instruction
    assign rs = instr[25:21];  // rs
@@ -55,7 +59,7 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
       .Op(Op), .Funct(Funct), .Zero(Zero),
       .RegWrite(RegWrite), .MemWrite(MemWrite),
       .EXTOp(EXTOp), .ALUOp(ALUOp), .NPCOp(NPCOp), 
-      .ALUSrc(ALUSrc), .GPRSel(GPRSel), .WDSel(WDSel)
+      .ALUSrc(ALUSrc), .SASrc(SASrc), .GPRSel(GPRSel), .WDSel(WDSel)
    );
    
    // instantiation of PC
@@ -73,7 +77,7 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
       .clk(clk), .rst(rst), .RFWr(RegWrite), 
       .A1(rs), .A2(rt), .A3(A3), 
       .WD(WD), 
-      .RD1(RD1), .RD2(writedata),
+      .RD1(RD1), .RD2(writedata), .RD3(RD2),
       .reg_sel(reg_sel),
       .reg_data(reg_data) 
    );
@@ -92,15 +96,25 @@ module sccpu( clk, rst, instr, readdata, PC, MemWrite, aluout, writedata, reg_se
    EXT U_EXT ( 
       .Imm16(Imm16), .EXTOp(EXTOp), .Imm32(Imm32) 
    );
+
+   // mux for ALU A
+   mux2 #(32) U_MUX_ALU_A (
+      .d0(RD1), .d1(RD2), .s(ALUSrc[1]), .y(A)
+   );  
    
    // mux for ALU B
    mux2 #(32) U_MUX_ALU_B (
-      .d0(writedata), .d1(Imm32), .s(ALUSrc), .y(B)
+      .d0(writedata), .d1(Imm32), .s(ALUSrc[0]), .y(B)
+   );   
+
+   // mux for ALU Shamt
+   mux2 #(5) U_MUX_ALU_Shamt (
+      .d0(Shamt), .d1(RD1[4:0]), .s(SASrc), .y(sa)
    );   
    
    // instantiation of alu
    alu U_ALU ( 
-      .A(RD1), .B(B), .ALUOp(ALUOp), .C(aluout), .Zero(Zero)
+      .A(A), .B(B), .Shamt(sa), .ALUOp(ALUOp), .C(aluout), .Zero(Zero)
    );
 
 endmodule

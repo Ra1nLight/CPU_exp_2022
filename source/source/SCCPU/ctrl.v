@@ -4,7 +4,7 @@
 module ctrl(Op, Funct, Zero, 
             RegWrite, MemWrite,
             EXTOp, ALUOp, NPCOp, 
-            ALUSrc, GPRSel, WDSel
+            ALUSrc, SASrc, GPRSel, WDSel
             );
             
    input  [5:0] Op;       // opcode
@@ -16,7 +16,8 @@ module ctrl(Op, Funct, Zero,
    output       EXTOp;    // control signal to signed extension
    output [3:0] ALUOp;    // ALU opertion
    output [1:0] NPCOp;    // next pc operation
-   output       ALUSrc;   // ALU source for A
+   output [1:0] ALUSrc;   // ALU source for A
+   output       SASrc;    // ALU source for Shamt
 
    output [1:0] GPRSel;   // general purpose register selection
    output [1:0] WDSel;    // (register) write data selection
@@ -35,6 +36,9 @@ module ctrl(Op, Funct, Zero,
    wire i_jr   = rtype&~Funct[5]&~Funct[4]& Funct[3]&~Funct[2]&~Funct[1]&~Funct[0]; // jr
    wire i_jalr = rtype&~Funct[5]&~Funct[4]& Funct[3]&~Funct[2]&~Funct[1]& Funct[0]; // jalr
    wire i_sll  = rtype&~Funct[5]&~Funct[4]&~Funct[3]&~Funct[2]&~Funct[1]&~Funct[0]; // sll
+   wire i_sllv = rtype&~Funct[5]&~Funct[4]&~Funct[3]& Funct[2]&~Funct[1]&~Funct[0]; // sllv
+   wire i_srl  = rtype&~Funct[5]&~Funct[4]&~Funct[3]&~Funct[2]& Funct[1]&~Funct[0]; // srl
+   wire i_srlv = rtype&~Funct[5]&~Funct[4]&~Funct[3]& Funct[2]& Funct[1]&~Funct[0]; // srlv
 
   // i format
    wire i_addi = ~Op[5]&~Op[4]& Op[3]&~Op[2]&~Op[1]&~Op[0]; // addi
@@ -51,10 +55,12 @@ module ctrl(Op, Funct, Zero,
    wire i_jal  = ~Op[5]&~Op[4]&~Op[3]&~Op[2]& Op[1]& Op[0];  // jal
 
   // generate control signals
-  assign RegWrite   = rtype | i_lw | i_addi | i_ori | i_andi | i_jal | i_nor | i_lui | i_slti | i_jalr; // register write  
+  assign RegWrite   = rtype | i_lw | i_addi | i_ori | i_andi | i_jal | i_nor | i_lui | i_slti | i_jalr | i_sll | i_sllv | i_srl | i_srlv; // register write  
   
   assign MemWrite   = i_sw;                           // memory write
-  assign ALUSrc     = i_lw | i_sw | i_addi | i_ori | i_andi | i_lui | i_slti;   // ALU B is from instruction immediate
+  assign ALUSrc[0]  = i_lw | i_sw | i_addi | i_ori | i_andi | i_lui | i_slti;   // ALU B is from instruction immediate
+  assign ALUSrc[1]  = i_sll | i_sllv | i_srl | i_srlv;                          // ALU A is from rs or rt
+  assign SASrc      = i_sllv | i_srlv;                                          // ALU Shamt is from rs
   assign EXTOp      = i_addi | i_lw | i_sw | i_andi | i_lui | i_slti;           // signed extension
 
   // GPRSel_RD   2'b00
@@ -86,9 +92,10 @@ module ctrl(Op, Funct, Zero,
   // ALU_NOR   4'b0111
   // ALU_SLL   4'b1000
   // ALU_LUI   4'b1001
+  // ALU_SRL   4'b1010
   assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu | i_andi | i_nor | i_lui | i_slti;
-  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi | i_nor;
+  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi | i_nor | i_srl | i_srlv;
   assign ALUOp[2] = i_or | i_ori | i_slt | i_sltu | i_nor | i_slti;
-  assign ALUOp[3] = i_sll | i_lui;
+  assign ALUOp[3] = i_sll | i_sllv | i_lui | i_srl | i_srlv;
 
 endmodule
