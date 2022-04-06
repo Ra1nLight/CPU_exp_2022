@@ -49,6 +49,7 @@ module ctrl(Op, Funct, Zero,
    wire i_andi = ~Op[5]&~Op[4]& Op[3]& Op[2]&~Op[1]&~Op[0]; // andi
    wire i_lui  = ~Op[5]&~Op[4]& Op[3]& Op[2]& Op[1]& Op[0]; // lui
    wire i_slti = ~Op[5]&~Op[4]& Op[3]&~Op[2]& Op[1]&~Op[0]; // slti
+   wire i_bne  = ~Op[5]&~Op[4]&~Op[3]& Op[2]&~Op[1]& Op[0]; // bne
 
   // j format
    wire i_j    = ~Op[5]&~Op[4]&~Op[3]&~Op[2]& Op[1]&~Op[0];  // j
@@ -79,7 +80,7 @@ module ctrl(Op, Funct, Zero,
   // NPC_BRANCH  2'b01
   // NPC_JUMP    2'b10
   // NPC_JUMPR   2'b11
-  assign NPCOp[0] = (i_beq & Zero) | i_jr | i_jalr;
+  assign NPCOp[0] = (i_beq & Zero) | (~i_bne & Zero) | i_jr | i_jalr;
   assign NPCOp[1] = i_j | i_jr | i_jal | i_jalr;
   
   // ALU_NOP   4'b0000
@@ -94,7 +95,7 @@ module ctrl(Op, Funct, Zero,
   // ALU_LUI   4'b1001
   // ALU_SRL   4'b1010
   assign ALUOp[0] = i_add | i_lw | i_sw | i_addi | i_and | i_slt | i_addu | i_andi | i_nor | i_lui | i_slti;
-  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi | i_nor | i_srl | i_srlv;
+  assign ALUOp[1] = i_sub | i_beq | i_and | i_sltu | i_subu | i_andi | i_nor | i_srl | i_srlv | i_bne;
   assign ALUOp[2] = i_or | i_ori | i_slt | i_sltu | i_nor | i_slti;
   assign ALUOp[3] = i_sll | i_sllv | i_lui | i_srl | i_srlv;
 
