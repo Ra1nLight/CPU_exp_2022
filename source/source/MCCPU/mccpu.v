@@ -18,7 +18,7 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
    wire        PCWrite;     // control signal for PC write
    wire        IRWrite;     // control signal for IR write
    wire        EXTOp;       // control signal to signed extension
-   wire [2:0]  ALUOp;       // ALU opertion
+   wire [3:0]  ALUOp;       // ALU opertion
    wire [1:0]  PCSource;    // next PC operation
    wire        IorD;         // memory access for instruction or data
 
