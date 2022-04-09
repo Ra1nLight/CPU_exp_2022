@@ -17,7 +17,7 @@ module ctrl(clk, rst, Zero, Op, Funct,
    output reg       ALUSrcA;  // ALU source for A, 0 - PC, 1 - ReadData1
    output reg [1:0] ALUSrcB;  // ALU source for B, 0 - ReadData2, 1 - 4, 2 - extended immediate, 3 - branch offset
    output reg [3:0] ALUOp;    // ALU opertion
-   output reg [1:0] PCSource; // PC source, 0- ALU, 1-ALUOut, 2-JUMP address
+   output reg [1:0] PCSource; // PC source, 0- ALU, 1-ALUOut, 2-JUMP address, 3-JUMP register
    output reg [1:0] GPRSel;   // general purpose register selection
    output reg [1:0] WDSel;    // (register) write data selection
    output reg       IorD;     // 0-memory access for instruction, 1 - memory access for data
@@ -122,12 +122,22 @@ module ctrl(clk, rst, Zero, Op, Funct,
              PCSource = 2'b10; // JUMP address
              PCWrite = 1;
              nextstate = sif;
+           end else if (i_jr) begin
+             PCSource = 2'b11; // JUMP register
+             PCWrite = 1;
+             nextstate = sif;
            end else if (i_jal) begin
              PCSource = 2'b10; // JUMP address
              PCWrite = 1;
              RegWrite = 1;
              WDSel = 2'b10;    // WDSel_FromPC  2'b10 
              GPRSel = 2'b10;   // GPRSel_31     2'b10
+             nextstate = sif;
+           end else if (i_jalr) begin
+             PCSource = 2'b11; // JUMP register
+             PCWrite = 1;
+             RegWrite = 1;
+             WDSel = 2'b10;    // WDSel_FromPC  2'b10 
              nextstate = sif;
            end else begin
              ALUSrcA = 0;       // PC
