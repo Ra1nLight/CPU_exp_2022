@@ -25,8 +25,9 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
    wire [1:0]  WDSel;       // (register) write data selection
    wire [1:0]  GPRSel;      // general purpose register selection
    
-   wire        ALUSrcA;     // ALU source for A
+   wire [1:0]  ALUSrcA;     // ALU source for A
    wire [1:0]  ALUSrcB;     // ALU source for B
+   wire        SASrc;       // ALU source for Shamt
    wire        Zero;        // ALU ouput zero
 
 
@@ -36,6 +37,7 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
    wire [4:0]  rs;          // rs
    wire [4:0]  rt;          // rt
    wire [4:0]  rd;          // rd
+   wire [4:0]  Shamt;       // shamt
    wire [5:0]  Op;          // opcode
    wire [5:0]  Funct;       // funct
    wire [15:0] Imm16;       // 16-bit immediate
@@ -49,6 +51,7 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
    wire [31:0] B;           // register B
    wire [31:0] ALUA;        // ALU A 
    wire [31:0] ALUB;        // ALU B
+   wire [4:0]  sa;          // ALU Shamt
    wire [31:0] data;        // data
    wire [31:0] NPC;         // NPC
    
@@ -57,6 +60,7 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
    assign rs = instr[25:21];  // rs
    assign rt = instr[20:16];  // rt
    assign rd = instr[15:11];  // rd
+   assign Shamt = instr[10:6];// shamt
    assign Imm16 = instr[15:0];// 16-bit immediate
    assign IMM = instr[25:0];  // 26-bit immediate
    
@@ -66,7 +70,7 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
        .RegWrite(RegWrite), .MemWrite(MemWrite),
        .PCWrite(PCWrite), .IRWrite(IRWrite),
        .EXTOp(EXTOp), .ALUOp(ALUOp), .PCSource(PCSource),
-       .ALUSrcA(ALUSrcA), .ALUSrcB(ALUSrcB), 
+       .ALUSrcA(ALUSrcA), .ALUSrcB(ALUSrcB), .SASrc(SASrc),
        .GPRSel(GPRSel), .WDSel(WDSel), .IorD(IorD));
    
    // instantiation of PC
@@ -107,8 +111,8 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
    flopr  #(32) U_BR(clk, rst, RD2, B);//B register
 
    // mux for ALU A
-   mux2 #(32) U_MUX_ALU_A (
-      .d0(PC), .d1(A), .s(ALUSrcA), .y(ALUA)
+   mux4 #(32) U_MUX_ALU_A (
+      .d0(PC), .d1(A), .d2(B), .d3(32'b0), .s(ALUSrcA), .y(ALUA)
    ); 
    
    // mux for signed extension or zero extension
@@ -122,9 +126,14 @@ module mccpu( clk, rst, instr, readdata, PC, MemWrite, adr, writedata, reg_sel, 
       .s(ALUSrcB), .y(ALUB)
    ); 
 
+   // mux for ALU Shamt
+   mux2 #(5) U_MUX_ALU_Shamt (
+      .d0(Shamt), .d1(RD1[4:0]), .s(SASrc), .y(sa)
+   );   
+
    // instantiation of ALU
    alu U_ALU ( 
-      .A(ALUA), .B(ALUB), .ALUOp(ALUOp), .C(aluresult), .Zero(Zero)
+      .A(ALUA), .B(ALUB), .Shamt(sa), .ALUOp(ALUOp), .C(aluresult), .Zero(Zero)
    );
 
    // instantiation of ALUout Register

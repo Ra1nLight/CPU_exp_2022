@@ -3,7 +3,7 @@
 
 module ctrl(clk, rst, Zero, Op, Funct,
             RegWrite, MemWrite, PCWrite, IRWrite,
-            EXTOp, ALUOp, PCSource, ALUSrcA, ALUSrcB, 
+            EXTOp, ALUOp, PCSource, ALUSrcA, ALUSrcB, SASrc,
             GPRSel, WDSel, IorD);
     
    input  clk, rst, Zero;
@@ -14,8 +14,9 @@ module ctrl(clk, rst, Zero, Op, Funct,
    output reg       PCWrite;  // control signal for PC write
    output reg       IRWrite;  // control signal for IR write
    output reg       EXTOp;    // control signal to signed extension
-   output reg       ALUSrcA;  // ALU source for A, 0 - PC, 1 - ReadData1
+   output reg [1:0] ALUSrcA;  // ALU source for A, 0 - PC, 1 - ReadData1, 2 - ReadData2
    output reg [1:0] ALUSrcB;  // ALU source for B, 0 - ReadData2, 1 - 4, 2 - extended immediate, 3 - branch offset
+   output reg       SASrc;    // ALU source for Shamt, 0 - Shamt, 1 - RS[4:0]
    output reg [3:0] ALUOp;    // ALU opertion
    output reg [1:0] PCSource; // PC source, 0- ALU, 1-ALUOut, 2-JUMP address, 3-JUMP register
    output reg [1:0] GPRSel;   // general purpose register selection
@@ -100,8 +101,9 @@ module ctrl(clk, rst, Zero, Op, Funct,
      PCWrite  = 0;
      IRWrite  = 0;
      EXTOp    = 1;           // signed extension
-     ALUSrcA  = 1;           // 1 - ReadData1
+     ALUSrcA  = 2'b01;       // 1 - ReadData1
      ALUSrcB  = 2'b00;       // 0 - ReadData2
+     SASrc    = 0;           // 0 - Shamt
      ALUOp    = 4'b0001;     // ALU_ADD       4'b0001
      GPRSel   = 2'b00;       // GPRSel_RD     2'b00
      WDSel    = 2'b00;       // WDSel_FromALU 2'b00
@@ -112,7 +114,7 @@ module ctrl(clk, rst, Zero, Op, Funct,
          sif: begin
            PCWrite = 1;
            IRWrite = 1;
-           ALUSrcA = 0;      // PC
+           ALUSrcA = 2'b00;  // PC
            ALUSrcB = 2'b01;  // 4
            nextstate = sid;
          end
@@ -140,7 +142,7 @@ module ctrl(clk, rst, Zero, Op, Funct,
              WDSel = 2'b10;    // WDSel_FromPC  2'b10 
              nextstate = sif;
            end else begin
-             ALUSrcA = 0;       // PC
+             ALUSrcA = 2'b00;   // PC
              ALUSrcB = 2'b11;   // branch offset
              nextstate = sexe;
            end
@@ -163,6 +165,11 @@ module ctrl(clk, rst, Zero, Op, Funct,
                ALUSrcB = 2'b10; // select immediate
              if (i_ori)
                EXTOp = 0; // zero extension
+             if (i_sll | i_srl | i_sllv | i_srlv) begin
+               ALUSrcA = 2'b10;
+               if (i_sllv | i_srlv)
+                 SASrc = 1;
+             end
              nextstate = swb;
            end
          end
