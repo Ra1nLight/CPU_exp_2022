@@ -1,0 +1,335 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dE:/Codes/TEST/SCCPU_SIM
+valu
+Z0 !s110 1649643460
+!i10b 1
+!s100 Lj^P9Jj[H1;bk]I`nMz@b0
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I?AI^8[]mXP8c]YeeZgH9Y1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 dE:/Codes/TEST/MCCPU_SIM
+Z4 w1649500987
+8E:/Codes/TEST/MCCPU_SIM/alu.v
+FE:/Codes/TEST/MCCPU_SIM/alu.v
+!i122 11
+L0 3 31
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1649643460.000000
+!s107 ctrl_encode_def.v|E:/Codes/TEST/MCCPU_SIM/alu.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/alu.v|
+!i113 1
+Z7 o-work work
+Z8 tCvgOpt 0
+vctrl
+R0
+!i10b 1
+!s100 kC9g5VCkWK4_XLBmoPVK<3
+R1
+I[Y^[az:gZF:G?nf>k80FL2
+R2
+R3
+R4
+8E:/Codes/TEST/MCCPU_SIM/ctrl.v
+FE:/Codes/TEST/MCCPU_SIM/ctrl.v
+!i122 12
+L0 4 201
+R5
+r1
+!s85 0
+31
+R6
+!s107 E:/Codes/TEST/MCCPU_SIM/ctrl.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/ctrl.v|
+!i113 1
+R7
+R8
+vdm
+Z9 !s110 1649643461
+!i10b 1
+!s100 z[oB7jiU2gFlO8VelI4<G1
+R1
+Ih1bdH:3Tz;]MI0[]2j58b2
+R2
+R3
+Z10 w1648448002
+8E:/Codes/TEST/MCCPU_SIM/dm.v
+FE:/Codes/TEST/MCCPU_SIM/dm.v
+!i122 13
+L0 3 21
+R5
+r1
+!s85 0
+31
+Z11 !s108 1649643461.000000
+!s107 E:/Codes/TEST/MCCPU_SIM/dm.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/dm.v|
+!i113 1
+R7
+R8
+vEXT
+R9
+!i10b 1
+!s100 Y1nYon]hGP5X^]i>Ib1PI1
+R1
+Ia8FLPQ6BbdoPQg:A1jYLZ0
+R2
+R3
+R10
+8E:/Codes/TEST/MCCPU_SIM/EXT.v
+FE:/Codes/TEST/MCCPU_SIM/EXT.v
+!i122 14
+L0 2 9
+R5
+r1
+!s85 0
+31
+R11
+!s107 E:/Codes/TEST/MCCPU_SIM/EXT.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/EXT.v|
+!i113 1
+R7
+R8
+n@e@x@t
+vflopenr
+R9
+!i10b 1
+!s100 FRCl0MRUQ@a_DB@dMCG6`2
+R1
+IG3VSBPXmIiKaLKNj:@AP]3
+R2
+R3
+R10
+8E:/Codes/TEST/MCCPU_SIM/flopenr.v
+FE:/Codes/TEST/MCCPU_SIM/flopenr.v
+!i122 15
+L0 1 17
+R5
+r1
+!s85 0
+31
+R11
+!s107 E:/Codes/TEST/MCCPU_SIM/flopenr.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/flopenr.v|
+!i113 1
+R7
+R8
+vflopr
+R9
+!i10b 1
+!s100 =>LZgbJCL3MHJC@U]2H3a2
+R1
+I=4zFS[RVl]gf7U<iY8QDl2
+R2
+R3
+R10
+8E:/Codes/TEST/MCCPU_SIM/flopr.v
+FE:/Codes/TEST/MCCPU_SIM/flopr.v
+!i122 16
+L0 1 19
+R5
+r1
+!s85 0
+31
+R11
+!s107 E:/Codes/TEST/MCCPU_SIM/flopr.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/flopr.v|
+!i113 1
+R7
+R8
+vmccomp
+R9
+!i10b 1
+!s100 _IjO@[zIUA9XN@BD44_?i3
+R1
+IBRcJ3JlJMzz?TLG@6hDGL0
+R2
+R3
+R10
+8E:/Codes/TEST/MCCPU_SIM/mccomp.v
+FE:/Codes/TEST/MCCPU_SIM/mccomp.v
+!i122 17
+L0 1 38
+R5
+r1
+!s85 0
+31
+R11
+!s107 E:/Codes/TEST/MCCPU_SIM/mccomp.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/mccomp.v|
+!i113 1
+R7
+R8
+vmccomp_tb
+R9
+!i10b 1
+!s100 J9B9>jTG0>dJDXm>0zHCm2
+R1
+IcR^05CnBTe>mYzXbSPN7j2
+R2
+R3
+w1649643448
+8E:\Codes\TEST\MCCPU_SIM\mccomp_tb.v
+FE:\Codes\TEST\MCCPU_SIM\mccomp_tb.v
+!i122 18
+L0 3 30
+R5
+r1
+!s85 0
+31
+R11
+!s107 E:\Codes\TEST\MCCPU_SIM\mccomp_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:\Codes\TEST\MCCPU_SIM\mccomp_tb.v|
+!i113 1
+R7
+R8
+vmccpu
+R9
+!i10b 1
+!s100 XanhzBb;oNHgFFGb^EKD62
+R1
+IMP;?:iV`95Yk<cBWNbiX`1
+R2
+R3
+R4
+8E:/Codes/TEST/MCCPU_SIM/mccpu.v
+FE:/Codes/TEST/MCCPU_SIM/mccpu.v
+!i122 19
+L0 1 156
+R5
+r1
+!s85 0
+31
+R11
+!s107 E:/Codes/TEST/MCCPU_SIM/mccpu.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/mccpu.v|
+!i113 1
+R7
+R8
+vmux16
+R9
+!i10b 1
+!s100 413g>U4LWNJJUX[RzJjYR0
+R1
+I7[CQ:V4UM]7Jg8A1LC[zQ2
+R2
+R3
+R10
+Z12 8E:/Codes/TEST/MCCPU_SIM/mux.v
+Z13 FE:/Codes/TEST/MCCPU_SIM/mux.v
+!i122 20
+L0 71 41
+R5
+r1
+!s85 0
+31
+R11
+Z14 !s107 E:/Codes/TEST/MCCPU_SIM/mux.v|
+Z15 !s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/mux.v|
+!i113 1
+R7
+R8
+vmux2
+R9
+!i10b 1
+!s100 z`70k8Yzij3`UR8?gSh6Q1
+R1
+IS_<=QJ8Tg;GSOSAB7=SU51
+R2
+R3
+R10
+R12
+R13
+!i122 20
+L0 2 11
+R5
+r1
+!s85 0
+31
+R11
+R14
+R15
+!i113 1
+R7
+R8
+vmux4
+R9
+!i10b 1
+!s100 H:jiT=oUbWhfAm5f8Jm[B0
+R1
+I6@e]?fHd945aQ6@Nl8OQB3
+R2
+R3
+R10
+R12
+R13
+!i122 20
+L0 15 23
+R5
+r1
+!s85 0
+31
+R11
+R14
+R15
+!i113 1
+R7
+R8
+vmux8
+R9
+!i10b 1
+!s100 lZ?>8ecQX>90WX]<o>o5f2
+R1
+In^4:E]BBT8AIc;_H5]D^G2
+R2
+R3
+R10
+R12
+R13
+!i122 20
+L0 40 29
+R5
+r1
+!s85 0
+31
+R11
+R14
+R15
+!i113 1
+R7
+R8
+vRF
+R9
+!i10b 1
+!s100 QnLj0799TAGOkGaWN8LWC0
+R1
+I73E:j]AB`>WTOX3<VXb5?1
+R2
+R3
+R4
+8E:/Codes/TEST/MCCPU_SIM/RF.v
+FE:/Codes/TEST/MCCPU_SIM/RF.v
+!i122 21
+L0 2 35
+R5
+r1
+!s85 0
+31
+R11
+!s107 E:/Codes/TEST/MCCPU_SIM/RF.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/Codes/TEST/MCCPU_SIM/RF.v|
+!i113 1
+R7
+R8
+n@r@f

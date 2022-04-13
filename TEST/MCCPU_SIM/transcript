@@ -1,0 +1,195 @@
+vsim -gui work.mccomp_tb
+# vsim -gui work.mccomp_tb 
+# Start time: 10:29:01 on Apr 11,2022
+# Loading work.mccomp_tb
+# Loading work.mccomp
+# Loading work.mccpu
+# Loading work.ctrl
+# Loading work.flopenr
+# Loading work.mux4
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.RF
+# Loading work.EXT
+# Loading work.alu
+# Loading work.dm
+add wave -position end  sim:/mccomp_tb/U_MCCOMP/clk
+add wave -position end  sim:/mccomp_tb/U_MCCOMP/instr
+add wave -position end  sim:/mccomp_tb/U_MCCOMP/PC
+run 1000
+# r[ 2] = 0x00000005,
+# r[ 3] = 0x0000000c,
+run
+run
+# r[ 7] = 0x00000003,
+run
+run
+run
+run
+# r[ 1] = 0x0000004c,
+run
+run
+# r[31] = 0x00000014,
+run
+run
+run
+run
+# r[ 7] = 0x00000006,
+run
+run
+# r[31] = 0x00000054,
+run
+run
+run
+run
+# r[ 1] = 0x55aa0000,
+run
+run
+run
+run
+# r[ 1] = 0x00000000,
+run
+run
+run
+run
+run
+run
+run
+# r[ 7] = 0x00000007,
+run
+run
+run
+run
+# r[ 1] = 0x00000005,
+run
+run
+run
+run
+# r[ 1] = 0x0000000c,
+run
+run
+run
+run
+# r[ 1] = 0x00000000,
+run
+run
+run
+run
+# r[ 7] = 0x00000003,
+run
+run
+run
+run
+run
+run
+# r[31] = 0x00000014,
+run
+run
+run
+run
+run
+run
+# r[ 4] = 0x00000007,
+run
+run
+run
+run
+# r[ 5] = 0x00000004,
+run
+run
+run
+run
+# r[ 5] = 0x0000000b,
+run
+run
+run
+run
+run
+run
+run
+# r[ 4] = 0x00000000,
+run
+run
+run
+run
+run
+run
+run
+# r[ 4] = 0x00000001,
+run
+run
+run
+run
+# r[ 7] = 0x0000000c,
+run
+run
+run
+run
+# r[ 7] = 0x00000007,
+run
+run
+run
+run
+# dmem[0x00000100] = 0x00000007,
+run
+run
+run
+run
+run
+# r[ 2] = 0x00000007,
+run
+run
+run
+run
+run
+run
+# dmem[0x00000104] = 0x00000007,
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+run
+run
+run
+run
+# r[ 2] = 0x00000005,
+run
+run
+run
+run
+# r[ 3] = 0x0000000c,
+run
+run
+run
+run
+# r[ 7] = 0x00000003,
+run
+run
+run
+run
+# r[ 1] = 0x0000004c,
+run
+run
+# r[31] = 0x00000014,
+run
+run
+run
+run
+# r[ 7] = 0x00000006,
+run
+run
+# r[31] = 0x00000054,
+run
+run
+run
+run
+# r[ 1] = 0x55aa0000,
+run
+run
+# End time: 12:11:36 on Apr 11,2022, Elapsed time: 1:42:35
+# Errors: 0, Warnings: 1

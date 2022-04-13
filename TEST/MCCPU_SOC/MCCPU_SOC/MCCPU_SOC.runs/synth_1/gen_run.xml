@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1649759744">
+  <File Type="PA-TCL" Name="MCCPUSOC_Top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="MCCPUSOC_Top_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="MCCPUSOC_Top_reports.tcl"/>
+  <File Type="RDS-RDS" Name="MCCPUSOC_Top.vds"/>
+  <File Type="RDS-UTIL" Name="MCCPUSOC_Top_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="MCCPUSOC_Top_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="MCCPUSOC_Top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="MCCPUSOC_Top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="MCCPUSOC_Top_timing_summary_synth.pb"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/EXT.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../EXT.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/MIO_BUS.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../MIO_BUS.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/Multi_CH32.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Multi_CH32.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/RF.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../RF.v"/>
+        <Attr Name="ImportTime" Val="1649500987"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/ctrl_encode_def.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ctrl_encode_def.v"/>
+        <Attr Name="ImportTime" Val="1649500987"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/alu.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../alu.v"/>
+        <Attr Name="ImportTime" Val="1649500987"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/clk_div.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../clk_div.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/ctrl.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ctrl.v"/>
+        <Attr Name="ImportTime" Val="1649500987"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/flopenr.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../flopenr.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/flopr.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../flopr.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/mccpu.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../mccpu.v"/>
+        <Attr Name="ImportTime" Val="1649500987"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/mux.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../mux.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/seg7x16.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../seg7x16.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/MCCPU_SOC/MCCPU_Top.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../MCCPU_Top.v"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../studentnosorting.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="MCCPUSOC_Top"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/imports/MCCPU_SOC/Nexys4DDR_CPU.xdc">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Nexys4DDR_CPU.xdc"/>
+        <Attr Name="ImportTime" Val="1648448002"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2017">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
+    <Step Id="synth_design"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="dmem"/>
+</GenRun>
